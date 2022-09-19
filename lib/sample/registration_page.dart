@@ -1,44 +1,72 @@
 import 'dart:async';
-import 'package:final_task/dassbord.dart';
+import 'dart:developer';
+import 'package:final_task/home_Screens/dassbord.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'registration_page.dart';
-import 'dassbord.dart';
+import 'login_page.dart';
+import 'profile_page.dart';
 
-class Login_Page extends StatefulWidget {
+class MyApp extends StatelessWidget {
   @override
-  _Login_PageState createState() => _Login_PageState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Registration',
+    );
+  }
 }
 
-class _Login_PageState extends State<Login_Page> {
+class Registration_Page extends StatefulWidget {
+  @override
+  _Registration_PageState createState() => _Registration_PageState();
+}
+
+class _Registration_PageState extends State<Registration_Page> {
   bool _isHidden = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(
-                // horizontal: 18.0,
-                // vertical: 16.0,
-                ),
-            child: Flexible(
+      // resizeToAvoidBottomInset: false,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  //horizontal: 18.0,
+                  // vertical: 16.0,
+                  ),
               child: Container(
                 decoration: BoxDecoration(color: Color(0xffFFFFFF)),
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 86,
+                      height: 61,
                     ),
-                    Image.asset(
-                      'image1.png',
-                      width: 256,
-                      height: 174,
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 30,
+                        ),
+                        InkWell(
+                          child: Icon(
+                            Icons.arrow_back,
+                            color: Color(0xffFC7508),
+                            //size: 12,
+                          ),
+                          onTap: () {
+                            Navigator.pop(context, MaterialPageRoute(
+                                builder: (BuildContext context) {
+                              return Login_Page();
+                            }));
+                          },
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 41,
                     ),
                     Text(
-                      "Welcome Back",
+                      "Create Account",
                       style: GoogleFonts.inter(
                         decoration: TextDecoration.none,
                         fontSize: 28,
@@ -50,7 +78,7 @@ class _Login_PageState extends State<Login_Page> {
                       height: 14,
                     ),
                     Text(
-                      "Login to continue",
+                      "Create your New Journey",
                       style: GoogleFonts.inter(
                         decoration: TextDecoration.none,
                         fontSize: 16,
@@ -58,10 +86,37 @@ class _Login_PageState extends State<Login_Page> {
                         color: Color(0xff6C7178),
                       ),
                     ),
-                    SizedBox(height: 83),
+                    SizedBox(height: 54),
                     Center(
                       child: Column(
                         children: [
+                          SizedBox(
+                            width: 336,
+                            height: 56,
+                            child: TextFormField(
+                              initialValue: 'johnlincoln ',
+                              decoration: InputDecoration(
+                                labelText: 'NAME',
+                                //errorText: 'Error message',
+                                labelStyle: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0xff6C7178)),
+                                border: OutlineInputBorder(),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color(0xff262632), width: 1.0)),
+                                prefixIcon: Icon(
+                                  Icons.person_outline,
+                                  size: 18,
+                                  color: Color(0XffFC7508),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 32,
+                          ),
                           SizedBox(
                             width: 336,
                             height: 56,
@@ -79,7 +134,7 @@ class _Login_PageState extends State<Login_Page> {
                                     borderSide: BorderSide(
                                         color: Color(0xff262632), width: 1.0)),
                                 prefixIcon: Icon(
-                                  Icons.mail_outline,
+                                  Icons.email_outlined,
                                   size: 18,
                                   color: Color(0XffFC7508),
                                 ),
@@ -87,7 +142,34 @@ class _Login_PageState extends State<Login_Page> {
                             ),
                           ),
                           SizedBox(
-                            height: 25,
+                            height: 32,
+                          ),
+                          SizedBox(
+                            width: 336,
+                            height: 56,
+                            child: TextFormField(
+                              initialValue: '9876543210 ',
+                              decoration: InputDecoration(
+                                labelText: 'PHONE NUMBER',
+                                //errorText: 'Error message',
+                                labelStyle: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0xff6C7178)),
+                                border: OutlineInputBorder(),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color(0xff262632), width: 1.0)),
+                                prefixIcon: Icon(
+                                  Icons.phone_iphone_outlined,
+                                  size: 18,
+                                  color: Color(0XffFC7508),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 32,
                           ),
                           SizedBox(
                             width: 336,
@@ -121,32 +203,46 @@ class _Login_PageState extends State<Login_Page> {
                               ),
                             ),
                           ),
+                          SizedBox(
+                            height: 32,
+                          ),
+                          SizedBox(
+                            width: 336,
+                            height: 56,
+                            child: TextField(
+                              obscureText: _isHidden,
+                              decoration: InputDecoration(
+                                labelText: 'CONFIRM PASSWORD',
+                                border: OutlineInputBorder(),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color(0xff262632), width: 1.0)),
+                                prefixIcon: Icon(
+                                  Icons.lock_outline,
+                                  size: 18,
+                                  color: Color(0XffFC7508),
+                                ),
+                                labelStyle: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0xff6C7178)),
+                                suffix: InkWell(
+                                  onTap: _togglePasswordView,
+                                  child: Icon(
+                                    _isHidden
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                    size: 16,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
                     SizedBox(
-                      height: 16,
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: 255,
-                        ),
-                        InkWell(
-                            child: Text(
-                              "Forgot Password?",
-                              style: GoogleFonts.inter(
-                                decoration: TextDecoration.none,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xffFC7508),
-                              ),
-                            ),
-                            onTap: () {}),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 42,
+                      height: 39,
                     ),
                     InkWell(
                       child: Container(
@@ -159,7 +255,7 @@ class _Login_PageState extends State<Login_Page> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "LOGIN",
+                                "CREATE ACCOUNT",
                                 style: GoogleFonts.poppins(
                                   decoration: TextDecoration.none,
                                   fontSize: 16,
@@ -170,9 +266,9 @@ class _Login_PageState extends State<Login_Page> {
                             ],
                           )),
                       onTap: () {
-                        Navigator.push(context,
+                        Navigator.pop(context,
                             MaterialPageRoute(builder: (BuildContext context) {
-                          return dashbord_page();
+                          return Login_Page();
                         }));
                       },
                     ),
@@ -183,7 +279,7 @@ class _Login_PageState extends State<Login_Page> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Don’t have account?",
+                          "Already have a account?",
                           style: GoogleFonts.inter(
                             decoration: TextDecoration.none,
                             fontSize: 14,
@@ -196,7 +292,7 @@ class _Login_PageState extends State<Login_Page> {
                         ),
                         InkWell(
                           child: Text(
-                            "Create a new account",
+                            "Login",
                             style: GoogleFonts.inter(
                               decoration: TextDecoration.none,
                               fontSize: 14,
@@ -205,9 +301,9 @@ class _Login_PageState extends State<Login_Page> {
                             ),
                           ),
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(
+                            Navigator.pop(context, MaterialPageRoute(
                                 builder: (BuildContext context) {
-                              return Registration_Page();
+                              return Login_Page();
                             }));
                           },
                         ),
@@ -217,8 +313,8 @@ class _Login_PageState extends State<Login_Page> {
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -1,12 +1,21 @@
 import 'dart:async';
 //import 'dart:ffi';
-import 'package:final_task/cart.dart';
+import 'package:final_task/home_Screens/cart.dart';
 import 'package:final_task/registration_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'login_page.dart';
-import 'dassbord.dart';
+import 'home_Screens/dassbord.dart';
 import 'popular_foods.dart';
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Product details',
+    );
+  }
+}
 
 class product_page extends StatefulWidget {
   @override
@@ -46,7 +55,7 @@ class _product_pageState extends State<product_page> {
                           //size: 12,
                         ),
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(
+                          Navigator.pop(context, MaterialPageRoute(
                               builder: (BuildContext context) {
                             return dashbord_page();
                           }));
@@ -164,7 +173,7 @@ class _product_pageState extends State<product_page> {
                           ),
                         ),
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(
+                          Navigator.pop(context, MaterialPageRoute(
                               builder: (BuildContext context) {
                             return Cart_Page();
                           }));
@@ -173,7 +182,7 @@ class _product_pageState extends State<product_page> {
                     ],
                   )),
               onTap: () {
-                Navigator.push(context,
+                Navigator.pop(context,
                     MaterialPageRoute(builder: (BuildContext context) {
                   return Cart_Page();
                 }));

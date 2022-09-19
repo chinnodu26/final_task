@@ -1,9 +1,17 @@
 import 'dart:async';
-import 'package:final_task/dassbord.dart';
+import 'package:final_task/home_Screens/dassbord.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'registration_page.dart';
-import 'dassbord.dart';
+import 'package:final_task/accounts/profile_page.dart';
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Cart',
+    );
+  }
+}
 
 class Cart_Page extends StatefulWidget {
   @override
@@ -35,7 +43,7 @@ class _Cart_PageState extends State<Cart_Page> {
                       size: 50,
                     ),
                     onTap: () {
-                      Navigator.push(context,
+                      Navigator.pop(context,
                           MaterialPageRoute(builder: (BuildContext context) {
                         return dashbord_page();
                       }));
@@ -71,7 +79,7 @@ class _Cart_PageState extends State<Cart_Page> {
                         ),
                       ),
                       onTap: () {
-                        Navigator.push(context,
+                        Navigator.pop(context,
                             MaterialPageRoute(builder: (BuildContext context) {
                           return dashbord_page();
                         }));
