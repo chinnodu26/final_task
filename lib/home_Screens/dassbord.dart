@@ -158,7 +158,7 @@ class _dashbord_pageState extends State<dashbord_page> {
                       children: [
                         InkWell(
                           onTap: () {},
-                          child: Text("pushular Foods",
+                          child: Text("popular Foods",
                               style: GoogleFonts.inter(
                                   decoration: TextDecoration.none,
                                   fontSize: 21,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'registration_page.dart';
 import 'package:final_task/home_Screens/dassbord.dart';
+import 'package:dio/dio.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -21,6 +22,37 @@ class Login_Page extends StatefulWidget {
 
 class _Login_PageState extends State<Login_Page> {
   bool _isHidden = true;
+
+  final userNameController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  bool _loading = false;
+  void formLogin() async {
+    String userName = userNameController.text.trim();
+    String password = passwordController.text.trim();
+
+    FormData formData = FormData.fromMap({
+      "username": userName,
+      "password": password,
+    });
+
+    setState(() {});
+
+    var responce = await Dio().post(
+        'http://jayanthi10.pythonanywhere.com/api/v1/login/',
+        data: formData);
+
+    if (responce.statusCode == 200) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => dashbord_page()));
+
+      setState(() {
+        _loading = true;
+      });
+    } else {
+      print("wrong passwor");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +106,8 @@ class _Login_PageState extends State<Login_Page> {
                           width: 336,
                           height: 56,
                           child: TextFormField(
-                            initialValue: 'john123@gmail.com ',
+                            controller: userNameController,
+                            // initialValue: 'john123@gmail.com ',
                             decoration: InputDecoration(
                               labelText: 'EMAIL',
                               //errorText: 'Error message',
@@ -101,6 +134,7 @@ class _Login_PageState extends State<Login_Page> {
                           width: 336,
                           height: 56,
                           child: TextField(
+                            controller: passwordController,
                             obscureText: _isHidden,
                             decoration: InputDecoration(
                               labelText: 'PASSWORD',
@@ -178,10 +212,11 @@ class _Login_PageState extends State<Login_Page> {
                           ],
                         )),
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (BuildContext context) {
-                        return dashbord_page();
-                      }));
+                      formLogin();
+                      // Navigator.push(context,
+                      //     MaterialPageRoute(builder: (BuildContext context) {
+                      //   return dashbord_page();
+                      // }));
                     },
                   ),
                   SizedBox(

@@ -36,11 +36,18 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^3.0.1
   dio: ^4.0.6
+  flutter_svg: ^0.20.0-nullsafety.3
+  cached_network_image: ^3.2.1
+  image_picker: ^0.8.5+3
+  
+  
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: ^0.10.0
+  
+
   
 flutter_icons:
   android: true
@@ -83,6 +90,7 @@ flutter:
       - image14.png
       - image15.png
       - image16.png
+      
   
   
 

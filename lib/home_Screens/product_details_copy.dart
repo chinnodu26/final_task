@@ -1,7 +1,5 @@
 import 'dart:async';
-import 'dart:convert';
 //import 'dart:ffi';
-import 'package:dio/dio.dart';
 import 'package:final_task/home_Screens/cart.dart';
 import 'package:final_task/authentications/registration_page.dart';
 import 'package:flutter/material.dart';
@@ -9,51 +7,22 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:final_task/authentications/login_page.dart';
 import 'dassbord.dart';
 import 'package:final_task/home_Screens/cart.dart';
-import 'package:final_task/models/product_details_api.dart';
 
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'Product details',
-//     );
-//   }
-// }
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Product details',
+    );
+  }
+}
 
 class product_page extends StatefulWidget {
-  const product_page({
-    this.productId,
-  });
-  final int? productId;
-
   @override
   _product_pageState createState() => _product_pageState();
 }
 
 class _product_pageState extends State<product_page> {
-  ProductDetailsAip? details_model;
-
-  void porductDetails() async {
-    try {
-      var responce = await Dio().get(
-          "http://jayanthi10.pythonanywhere.com/api/v1/product_details/?product_id=$widget.");
-      setState(() {
-        details_model = productDetailsAipFromJson(jsonEncode(responce.data));
-
-        print("${responce.data}");
-      });
-    } catch (e) {
-      setState(() {});
-      print(e);
-    }
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    porductDetails();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,7 +68,7 @@ class _product_pageState extends State<product_page> {
                   width: 90,
                 ),
                 Text(
-                  '${details_model!.productName}',
+                  "Cherries",
                   style: GoogleFonts.inter(
                     decoration: TextDecoration.none,
                     fontSize: 21,
@@ -113,13 +82,10 @@ class _product_pageState extends State<product_page> {
               height: 41,
             ),
             InkWell(
-              // child: Image.asset(
-              //   'image10.png',
-              //   width: 414,
-              //   height: 303,
-              // ),
-              child: Image.network(
-                'http://jayanthi10.pythonanywhere.com${details_model!.image}',
+              child: Image.asset(
+                'image10.png',
+                width: 414,
+                height: 303,
               ),
               onTap: () {},
             ),
@@ -135,7 +101,7 @@ class _product_pageState extends State<product_page> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      ' ${details_model!.productId}',
+                      "JBest Cherries",
                       style: GoogleFonts.inter(
                         decoration: TextDecoration.none,
                         fontSize: 21,
@@ -144,7 +110,7 @@ class _product_pageState extends State<product_page> {
                       ),
                     ),
                     Text(
-                      ' ${details_model!.productName}',
+                      "Ordered 500G + 500G",
                       style: GoogleFonts.inter(
                         decoration: TextDecoration.none,
                         fontSize: 14,
@@ -170,7 +136,7 @@ class _product_pageState extends State<product_page> {
                     SizedBox(
                       width: 350,
                       child: Text(
-                        ' ${details_model!.description}',
+                        "Amet minim mollit non deserunt ullamco est sit\naliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.\n Exercitation veniam consequat sunt nostrud amet.Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit",
                         style: GoogleFonts.inter(
                           decoration: TextDecoration.none,
                           fontSize: 14,

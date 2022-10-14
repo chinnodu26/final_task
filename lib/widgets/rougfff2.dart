@@ -11,21 +11,16 @@ import 'dassbord.dart';
 import 'package:final_task/home_Screens/cart.dart';
 import 'package:final_task/models/product_details_api.dart';
 
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'Product details',
-//     );
-//   }
-// }
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Product details',
+    );
+  }
+}
 
 class product_page extends StatefulWidget {
-  const product_page({
-    this.productId,
-  });
-  final int? productId;
-
   @override
   _product_pageState createState() => _product_pageState();
 }
@@ -36,7 +31,7 @@ class _product_pageState extends State<product_page> {
   void porductDetails() async {
     try {
       var responce = await Dio().get(
-          "http://jayanthi10.pythonanywhere.com/api/v1/product_details/?product_id=$widget.");
+          "http://jayanthi10.pythonanywhere.com/api/v1/product_details/?product_id=1");
       setState(() {
         details_model = productDetailsAipFromJson(jsonEncode(responce.data));
 
@@ -61,14 +56,18 @@ class _product_pageState extends State<product_page> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-              height: 56.68,
-            ),
+            ProductDetailsAip == null
+                ? CircularProgressIndicator()
+                : SizedBox(
+                    height: 56.68,
+                  ),
             Row(
               children: [
-                SizedBox(
-                  width: 22,
-                ),
+                details_model == null
+                    ? CircularProgressIndicator()
+                    : SizedBox(
+                        width: 22,
+                      ),
                 Container(
                   width: 53,
                   height: 59,
@@ -112,25 +111,29 @@ class _product_pageState extends State<product_page> {
             SizedBox(
               height: 41,
             ),
-            InkWell(
-              // child: Image.asset(
-              //   'image10.png',
-              //   width: 414,
-              //   height: 303,
-              // ),
-              child: Image.network(
-                'http://jayanthi10.pythonanywhere.com${details_model!.image}',
-              ),
-              onTap: () {},
-            ),
+            ProductDetailsAip == null
+                ? CircularProgressIndicator()
+                : InkWell(
+                    // child: Image.asset(
+                    //   'image10.png',
+                    //   width: 414,
+                    //   height: 303,
+                    // ),
+                    child: Image.network(
+                      'http://jayanthi10.pythonanywhere.com${details_model!.image}',
+                    ),
+                    onTap: () {},
+                  ),
             SizedBox(
               height: 15,
             ),
             Row(
               children: [
-                SizedBox(
-                  width: 22,
-                ),
+                ProductDetailsAip == null
+                    ? CircularProgressIndicator()
+                    : SizedBox(
+                        width: 22,
+                      ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -186,42 +189,44 @@ class _product_pageState extends State<product_page> {
             SizedBox(
               height: 20,
             ),
-            InkWell(
-              child: Container(
-                  width: 380,
-                  height: 68,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      color: Color(0xffF46A07)),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      InkWell(
-                        child: Text(
-                          "Add to cart",
-                          style: GoogleFonts.poppins(
-                            decoration: TextDecoration.none,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xffffffff),
-                          ),
-                        ),
-                        onTap: () {
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (BuildContext context) {
-                            return Cart_Page();
-                          }));
-                        },
-                      ),
-                    ],
-                  )),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (BuildContext context) {
-                  return Cart_Page();
-                }));
-              },
-            ),
+            ProductDetailsAip == null
+                ? CircularProgressIndicator()
+                : InkWell(
+                    child: Container(
+                        width: 380,
+                        height: 68,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color: Color(0xffF46A07)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              child: Text(
+                                "Add to cart",
+                                style: GoogleFonts.poppins(
+                                  decoration: TextDecoration.none,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color(0xffffffff),
+                                ),
+                              ),
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(
+                                    builder: (BuildContext context) {
+                                  return Cart_Page();
+                                }));
+                              },
+                            ),
+                          ],
+                        )),
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (BuildContext context) {
+                        return Cart_Page();
+                      }));
+                    },
+                  ),
           ],
         ),
       ),

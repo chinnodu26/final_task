@@ -1,3 +1,4 @@
+import 'package:final_task/home_Screens/add_product.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:final_task/home_Screens/product_details.dart';
@@ -212,7 +213,12 @@ class DashBoard_Categories extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomRight,
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (BuildContext context) {
+                      return add_Product();
+                    }));
+                  },
                   child: Container(
                     width: 30,
                     height: 30,
@@ -228,7 +234,12 @@ class DashBoard_Categories extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (BuildContext context) {
+                                return add_Product();
+                              }));
+                            },
                             child: Icon(
                               Icons.add,
                               color: Color(0xffFFFFFF),
