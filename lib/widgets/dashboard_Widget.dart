@@ -1,21 +1,26 @@
 import 'package:final_task/home_Screens/add_product.dart';
+import 'package:final_task/home_Screens/update.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:final_task/home_Screens/product_details.dart';
 import 'package:final_task/home_Screens/popular_foods.dart';
 import 'package:final_task/authentications/registration_page.dart';
+import 'package:final_task/models/popular_food_api.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 //Popular_List
 
+PopularfoodAip? popularfood_model;
+
 class DashBoard_Popular extends StatelessWidget {
-  const DashBoard_Popular({
-    required this.list1_title,
-    required this.list1_prise,
-    required this.list1_images,
-  });
-  final String list1_title;
-  final String list1_prise;
-  final String list1_images;
+  const DashBoard_Popular(
+      {required this.productName,
+      required this.discription,
+      required this.image});
+  // final String productId;
+  final String discription;
+  final String productName;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +42,7 @@ class DashBoard_Popular extends StatelessWidget {
               InkWell(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Text(list1_title,
+                  child: Text(productName,
                       style: GoogleFonts.inter(
                           decoration: TextDecoration.none,
                           fontSize: 15,
@@ -47,14 +52,14 @@ class DashBoard_Popular extends StatelessWidget {
                 onTap: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (BuildContext context) {
-                    return product_page();
+                    return product_pageDetails();
                   }));
                 },
               ),
               InkWell(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Text(list1_prise,
+                  child: Text(discription,
                       style: GoogleFonts.inter(
                           decoration: TextDecoration.none,
                           fontSize: 12,
@@ -64,7 +69,7 @@ class DashBoard_Popular extends StatelessWidget {
                 onTap: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (BuildContext context) {
-                    return product_page();
+                    return product_pageDetails();
                   }));
                 },
               ),
@@ -73,15 +78,15 @@ class DashBoard_Popular extends StatelessWidget {
               ),
               Center(
                 child: InkWell(
-                  child: Image.asset(
-                    list1_images,
+                  child: Image.network(
+                    image,
                     width: 131,
                     height: 100,
                   ),
                   onTap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (BuildContext context) {
-                      return product_page();
+                      return product_pageDetails();
                     }));
                   },
                 ),
@@ -89,11 +94,174 @@ class DashBoard_Popular extends StatelessWidget {
               SizedBox(
                 height: 15,
               ),
-              Align(
-                alignment: Alignment.bottomRight,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  InkWell(
+                    onTap: () {},
+                    child: Container(
+                      width: 30,
+                      height: 30,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(4.0),
+                            topLeft: Radius.circular(4.0),
+                            bottomLeft: Radius.circular(4.0),
+                            bottomRight: Radius.circular(10.0)),
+                        color: Color(0xffF47014),
+                      ),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(
+                                    builder: (BuildContext context) {
+                                  return update_Product();
+                                }));
+                              },
+                              child: Icon(
+                                Icons.edit,
+                                color: Color(0xffFFFFFF),
+                                //size: 11,
+                              ),
+                            ),
+                          ]),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    child: Container(
+                      width: 30,
+                      height: 30,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(4.0),
+                            topLeft: Radius.circular(4.0),
+                            bottomLeft: Radius.circular(4.0),
+                            bottomRight: Radius.circular(10.0)),
+                        color: Color(0xffF47014),
+                      ),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(
+                                    builder: (BuildContext context) {
+                                  return add_Product();
+                                }));
+                              },
+                              child: Icon(
+                                Icons.add,
+                                color: Color(0xffFFFFFF),
+                                //size: 11,
+                              ),
+                            ),
+                          ]),
+                    ),
+                  ),
+                ],
+              ),
+            ]),
+          ),
+        ],
+      ),
+    ]);
+  }
+}
+
+//Categories_List
+
+class DashBoard_Categories extends StatelessWidget {
+  const DashBoard_Categories(
+      {required this.productName,
+      required this.discription,
+      required this.image});
+  // final String productId;
+  final String discription;
+  final String productName;
+  final String image;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(children: [
+      Column(
+        children: [
+          Container(
+            width: 177,
+            height: 195,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: Color(0xffFFFFFF),
+            ),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              SizedBox(
+                height: 12,
+              ),
+              InkWell(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Text(productName,
+                      style: GoogleFonts.inter(
+                          decoration: TextDecoration.none,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xff121212))),
+                ),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                    return product_pageDetails();
+                  }));
+                },
+              ),
+              InkWell(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Text(discription,
+                      style: GoogleFonts.inter(
+                          decoration: TextDecoration.none,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xff121212))),
+                ),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                    return product_pageDetails();
+                  }));
+                },
+              ),
+              SizedBox(
+                height: 9,
+              ),
+              Center(
                 child: InkWell(
-                  onTap: () {},
-                  child: Container(
+                  child: Image.network(
+                    image,
+                    width: 131,
+                    height: 100,
+                  ),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (BuildContext context) {
+                      return product_pageDetails();
+                    }));
+                  },
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
                     width: 30,
                     height: 30,
                     decoration: BoxDecoration(
@@ -108,118 +276,24 @@ class DashBoard_Popular extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (BuildContext context) {
+                                return update_Product();
+                              }));
+                            },
                             child: Icon(
-                              Icons.add,
+                              Icons.edit,
                               color: Color(0xffFFFFFF),
                               //size: 11,
                             ),
                           ),
                         ]),
                   ),
-                ),
-              ),
-            ]),
-          ),
-        ],
-      ),
-    ]);
-  }
-}
-
-//Categories_List
-
-class DashBoard_Categories extends StatelessWidget {
-  const DashBoard_Categories(
-      {required this.list2_title,
-      required this.list2_prise,
-      required this.list2_images});
-
-  final String list2_title;
-  final String list2_prise;
-  final String list2_images;
-  @override
-  Widget build(BuildContext context) {
-    return Row(children: [
-      Column(
-        children: [
-          Container(
-            width: 177,
-            height: 195,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: Color(0xffFFFFFF),
-            ),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              SizedBox(
-                height: 12,
-              ),
-              InkWell(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Text(list2_title,
-                      style: GoogleFonts.inter(
-                          decoration: TextDecoration.none,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xff121212))),
-                ),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (BuildContext context) {
-                    return product_page();
-                  }));
-                },
-              ),
-              InkWell(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Text(list2_prise,
-                      style: GoogleFonts.inter(
-                          decoration: TextDecoration.none,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xff121212))),
-                ),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (BuildContext context) {
-                    return product_page();
-                  }));
-                },
-              ),
-              SizedBox(
-                height: 9,
-              ),
-              Center(
-                child: InkWell(
-                  child: Image.asset(
-                    list2_images,
-                    width: 131,
-                    height: 100,
+                  SizedBox(
+                    width: 5,
                   ),
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (BuildContext context) {
-                      return product_page();
-                    }));
-                  },
-                ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (BuildContext context) {
-                      return add_Product();
-                    }));
-                  },
-                  child: Container(
+                  Container(
                     width: 30,
                     height: 30,
                     decoration: BoxDecoration(
@@ -248,7 +322,7 @@ class DashBoard_Categories extends StatelessWidget {
                           ),
                         ]),
                   ),
-                ),
+                ],
               ),
             ]),
           ),

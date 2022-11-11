@@ -20,23 +20,23 @@ import 'package:final_task/models/product_details_api.dart';
 //   }
 // }
 
-class product_page extends StatefulWidget {
-  const product_page({
+class product_pageDetails extends StatefulWidget {
+  const product_pageDetails({
     this.productId,
   });
   final int? productId;
 
   @override
-  _product_pageState createState() => _product_pageState();
+  _product_pageDetailsState createState() => _product_pageDetailsState();
 }
 
-class _product_pageState extends State<product_page> {
+class _product_pageDetailsState extends State<product_pageDetails> {
   ProductDetailsAip? details_model;
 
   void porductDetails() async {
     try {
       var responce = await Dio().get(
-          "http://jayanthi10.pythonanywhere.com/api/v1/product_details/?product_id=$widget.");
+          "http://jayanthi10.pythonanywhere.com/api/v1/product_details/?product_id=${widget.productId}");
       setState(() {
         details_model = productDetailsAipFromJson(jsonEncode(responce.data));
 

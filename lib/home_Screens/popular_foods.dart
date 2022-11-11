@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:ffi';
 
 //import 'dart:ffi';
 import 'package:dio/dio.dart';
@@ -161,15 +160,15 @@ class _popular_foods_pageState extends State<popular_foods_page> {
                               child: Popular_Foods(
                                 productName:
                                     '${popularfood_model!.data![index].productName}',
-                                productId:
-                                    '${popularfood_model!.data![index].productId}',
+                                discription:
+                                    '${popularfood_model!.data![index].description}',
                                 image:
                                     'http://jayanthi10.pythonanywhere.com${popularfood_model!.data![index].image}',
                               ),
                               onTap: () {
                                 Navigator.push(context, MaterialPageRoute(
                                     builder: (BuildContext context) {
-                                  return product_page(
+                                  return product_pageDetails(
                                     productId: popularfood_model!
                                         .data![index].productId,
                                   );

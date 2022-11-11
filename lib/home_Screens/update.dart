@@ -16,12 +16,12 @@ import 'package:image_picker/image_picker.dart';
 //   }
 // }
 
-class add_Product extends StatefulWidget {
+class update_Product extends StatefulWidget {
   @override
-  _add_ProductState createState() => _add_ProductState();
+  _update_ProductState createState() => _update_ProductState();
 }
 
-class _add_ProductState extends State<add_Product> {
+class _update_ProductState extends State<update_Product> {
   XFile? insidePic;
   String networkImage = "";
   final picker = ImagePicker();
@@ -40,6 +40,8 @@ class _add_ProductState extends State<add_Product> {
 
   final productNameController = TextEditingController();
   final descriptionController = TextEditingController();
+  final product_idController = TextEditingController();
+
   bool _isHidden = true;
 
   //final imageController = TextEditingController();
@@ -50,9 +52,12 @@ class _add_ProductState extends State<add_Product> {
   void formLogin() async {
     String product_name = productNameController.text.trim();
     String description = descriptionController.text.trim();
+    String product_id = product_idController.text.trim();
+
     //String image = imageController.text.trim();
 
     FormData formData = FormData.fromMap({
+      "product_id": product_id,
       "product_name": product_name,
       "description": description,
       "image": MultipartFile.fromBytes(
@@ -63,8 +68,8 @@ class _add_ProductState extends State<add_Product> {
 
     setState(() {});
 
-    var responce = await Dio().post(
-        'http://jayanthi10.pythonanywhere.com/api/v1/add_products/',
+    var responce = await Dio().patch(
+        'http://jayanthi10.pythonanywhere.com/api/v1/update_product/',
         data: formData);
 
     if (responce.statusCode == 200) {
@@ -108,6 +113,38 @@ class _add_ProductState extends State<add_Product> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Text(
+                        "Product id",
+                        style: GoogleFonts.inter(
+                          decoration: TextDecoration.none,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xff000000),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      SizedBox(
+                        width: 336,
+                        height: 60,
+                        child: TextFormField(
+                          controller: product_idController,
+                          decoration: InputDecoration(
+                            labelStyle: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xff6C7178)),
+                            border: OutlineInputBorder(),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color(0xff262632), width: 1.0)),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
                       Text(
                         "Product name",
                         style: GoogleFonts.inter(
@@ -185,7 +222,7 @@ class _add_ProductState extends State<add_Product> {
                     onPressed: (() {
                       formLogin();
                     }),
-                    child: Text('Upload'))
+                    child: Text('update'))
               ]),
             ),
           ),
