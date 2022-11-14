@@ -23,8 +23,14 @@ import 'package:final_task/models/product_details_api.dart';
 class product_pageDetails extends StatefulWidget {
   const product_pageDetails({
     this.productId,
+    this.productName,
+    this.description,
+    this.image,
   });
   final int? productId;
+  final String? productName;
+  final String? description;
+  final String? image;
 
   @override
   _product_pageDetailsState createState() => _product_pageDetailsState();
@@ -36,7 +42,7 @@ class _product_pageDetailsState extends State<product_pageDetails> {
   void porductDetails() async {
     try {
       var responce = await Dio().get(
-          "http://jayanthi10.pythonanywhere.com/api/v1/product_details/?product_id=${widget.productId}");
+          "http://jayanthi10.pythonanywhere.com/api/v1/product_details/?product_id=1${widget.productId}");
       setState(() {
         details_model = productDetailsAipFromJson(jsonEncode(responce.data));
 
@@ -58,6 +64,7 @@ class _product_pageDetailsState extends State<product_pageDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       // resizeToAvoidBottomInset: false,
+
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -98,31 +105,35 @@ class _product_pageDetailsState extends State<product_pageDetails> {
                 SizedBox(
                   width: 90,
                 ),
-                Text(
-                  '${details_model!.productName}',
-                  style: GoogleFonts.inter(
-                    decoration: TextDecoration.none,
-                    fontSize: 21,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xff121212),
-                  ),
-                ),
+                details_model == null
+                    ? CircularProgressIndicator()
+                    : Text(
+                        '${details_model!.productName}',
+                        style: GoogleFonts.inter(
+                          decoration: TextDecoration.none,
+                          fontSize: 21,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xff121212),
+                        ),
+                      ),
               ],
             ),
             SizedBox(
               height: 41,
             ),
-            InkWell(
-              // child: Image.asset(
-              //   'image10.png',
-              //   width: 414,
-              //   height: 303,
-              // ),
-              child: Image.network(
-                'http://jayanthi10.pythonanywhere.com${details_model!.image}',
-              ),
-              onTap: () {},
-            ),
+            details_model == null
+                ? CircularProgressIndicator()
+                : InkWell(
+                    // child: Image.asset(
+                    //   'image10.png',
+                    //   width: 414,
+                    //   height: 303,
+                    // ),
+                    child: Image.network(
+                      'http://jayanthi10.pythonanywhere.com${details_model!.image}',
+                    ),
+                    onTap: () {},
+                  ),
             SizedBox(
               height: 15,
             ),
@@ -134,24 +145,28 @@ class _product_pageDetailsState extends State<product_pageDetails> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      ' ${details_model!.productId}',
-                      style: GoogleFonts.inter(
-                        decoration: TextDecoration.none,
-                        fontSize: 21,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xff121212),
-                      ),
-                    ),
-                    Text(
-                      ' ${details_model!.productName}',
-                      style: GoogleFonts.inter(
-                        decoration: TextDecoration.none,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xff121212),
-                      ),
-                    ),
+                    details_model == null
+                        ? CircularProgressIndicator()
+                        : Text(
+                            ' ${details_model!.productId}',
+                            style: GoogleFonts.inter(
+                              decoration: TextDecoration.none,
+                              fontSize: 21,
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xff121212),
+                            ),
+                          ),
+                    details_model == null
+                        ? CircularProgressIndicator()
+                        : Text(
+                            ' ${details_model!.productName}',
+                            style: GoogleFonts.inter(
+                              decoration: TextDecoration.none,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xff121212),
+                            ),
+                          ),
                     SizedBox(
                       height: 20,
                     ),
@@ -167,18 +182,20 @@ class _product_pageDetailsState extends State<product_pageDetails> {
                     SizedBox(
                       height: 20,
                     ),
-                    SizedBox(
-                      width: 350,
-                      child: Text(
-                        ' ${details_model!.description}',
-                        style: GoogleFonts.inter(
-                          decoration: TextDecoration.none,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xff121212),
-                        ),
-                      ),
-                    ),
+                    details_model == null
+                        ? CircularProgressIndicator()
+                        : SizedBox(
+                            width: 350,
+                            child: Text(
+                              ' ${details_model!.description}',
+                              style: GoogleFonts.inter(
+                                decoration: TextDecoration.none,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xff121212),
+                              ),
+                            ),
+                          ),
                   ],
                 ),
               ],

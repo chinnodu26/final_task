@@ -49,7 +49,7 @@ class _update_ProductState extends State<update_Product> {
   bool _loading = false;
 
   PopularfoodAip? popularfood_model;
-  void formLogin() async {
+  void formupdate() async {
     String product_name = productNameController.text.trim();
     String description = descriptionController.text.trim();
     String product_id = product_idController.text.trim();
@@ -80,7 +80,7 @@ class _update_ProductState extends State<update_Product> {
         _loading = true;
       });
     } else {
-      print("please add  the product ");
+      print("update product ");
     }
   }
 
@@ -220,7 +220,7 @@ class _update_ProductState extends State<update_Product> {
                 SizedBox(height: 40),
                 ElevatedButton(
                     onPressed: (() {
-                      formLogin();
+                      formupdate();
                     }),
                     child: Text('update'))
               ]),

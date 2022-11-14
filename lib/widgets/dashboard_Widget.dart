@@ -7,6 +7,7 @@ import 'package:final_task/home_Screens/popular_foods.dart';
 import 'package:final_task/authentications/registration_page.dart';
 import 'package:final_task/models/popular_food_api.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:final_task/home_Screens/delete.dart';
 
 //Popular_List
 
@@ -127,6 +128,48 @@ class DashBoard_Popular extends StatelessWidget {
                               ),
                             ),
                           ]),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  InkWell(
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (BuildContext context) {
+                          return add_Product();
+                        }));
+                      },
+                      child: Container(
+                        width: 30,
+                        height: 30,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(4.0),
+                              topLeft: Radius.circular(4.0),
+                              bottomLeft: Radius.circular(4.0),
+                              bottomRight: Radius.circular(10.0)),
+                          color: Color(0xffF47014),
+                        ),
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(
+                                      builder: (BuildContext context) {
+                                    return delete_Product();
+                                  }));
+                                },
+                                child: Icon(
+                                  Icons.delete,
+                                  color: Color(0xffFFFFFF),
+                                  //size: 11,
+                                ),
+                              ),
+                            ]),
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -289,6 +332,48 @@ class DashBoard_Categories extends StatelessWidget {
                             ),
                           ),
                         ]),
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  InkWell(
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (BuildContext context) {
+                          return add_Product();
+                        }));
+                      },
+                      child: Container(
+                        width: 30,
+                        height: 30,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(4.0),
+                              topLeft: Radius.circular(4.0),
+                              bottomLeft: Radius.circular(4.0),
+                              bottomRight: Radius.circular(10.0)),
+                          color: Color(0xffF47014),
+                        ),
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(
+                                      builder: (BuildContext context) {
+                                    return delete_Product();
+                                  }));
+                                },
+                                child: Icon(
+                                  Icons.delete,
+                                  color: Color(0xffFFFFFF),
+                                  //size: 11,
+                                ),
+                              ),
+                            ]),
+                      ),
+                    ),
                   ),
                   SizedBox(
                     width: 5,
